@@ -1,0 +1,23 @@
+{
+ "mappings": {
+     "properties": {
+       "nginx.access.body_sent.bytes": { "type": "integer" },
+       "nginx.access.forwarded_for": { "type": "keyword" },
+       "nginx.access.geoip.city_name": { "type": "keyword" },
+       "nginx.access.geoip.country_name": { "type": "keyword" },
+       "nginx.access.geoip.location.lat": { "type": "float" },
+       "nginx.access.geoip.location.lon": { "type": "float" },
+       "nginx.access.http_version": { "type": "keyword" },
+       "nginx.access.method": { "type": "keyword" },
+       "nginx.access.referrer": { "type": "keyword" },
+       "nginx.access.remote_ip": { "type": "ip" },
+       "nginx.access.request_id": { "type": "keyword" },
+       "nginx.access.request_time": { "type": "float" },
+       "nginx.access.response_code": { "type": "keyword" },
+       "nginx.access.url": { "type": "keyword" },
+       "nginx.access.user_agent.device": { "type": "keyword" },
+       "nginx.access.user_agent.os": { "type": "keyword" },
+       "nginx.access.user_agent.os_name": { "type": "keyword" }
+      }
+  }
+}
