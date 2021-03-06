@@ -17,8 +17,8 @@ fi
 cp nginx.conf /etc/nginx/
 
 rm /etc/nginx/sites-enabled/*
-ln -s /etc/nginx/sites-available/victory121-http.conf  /etc/nginx/sites-enabled/victory121-http.conf
-ln -s /etc/nginx/sites-available/victory121-https.conf  /etc/nginx/sites-enabled/victory121-https.conf
+# ln -s /etc/nginx/sites-available/victory121-http.conf  /etc/nginx/sites-enabled/victory121-http.conf
+# ln -s /etc/nginx/sites-available/victory121-https.conf  /etc/nginx/sites-enabled/victory121-https.conf
 ln -s /etc/nginx/sites-available/kibana.conf  /etc/nginx/sites-enabled/kibana.conf
 
 service nginx reload
