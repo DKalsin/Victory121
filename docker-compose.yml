@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  django:
+    build: victory121
+    command: python manage.py runserver 0:8000
+    volumes:
+      - ./victory121:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  frontend:
+    build: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - django
