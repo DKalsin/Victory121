@@ -1,2 +1,2 @@
-postgresql-client
+psycopg2
 Django
