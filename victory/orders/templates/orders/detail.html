@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} Order details {{ order.id }} {% endblock %}
+
+{% block content %}
+<h1> {{ order.title }} </h1>
+<h2> {{ order.description }} </h2>
+<p> {{ order.get_status_display }} </p>
+<ul>
+  {% for comment in order.comments.all %}
+    <li> {{comment.text}} </li>
+  {% endfor %}
+</ul>
+<form action="{% url 'orders:add_comment' order.id %}" method="post">
+  {% csrf_token %}
+  {{ comment_form.as_p }}
+  <input type="submit" value="Comment">
+</form>
+{% endblock %}

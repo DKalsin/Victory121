@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Orders
+{% endblock %}
+
+{% block content %}
+{% for order in order_list %}
+  <div class="row">
+    <div class="col">
+      <a href="{% url 'orders:detail' order.id %}">{{ order.title }}</a>
+    </div>
+    <div class="col">
+      {{ order.assignee }}
+    </div>
+    <div class="col">
+      {{ order.get_status_display }}
+    </div>
+  </div>
+
+{% endfor %}
+{% endblock %}
