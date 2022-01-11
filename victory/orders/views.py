@@ -10,7 +10,6 @@ class IndexView(generic.ListView):
     template_name = 'orders/index.html'
 
     def get_queryset(self):
-        """Return the last five published questions."""
         return Order.objects.order_by('-updated')
 
 
