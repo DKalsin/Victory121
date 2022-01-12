@@ -17,52 +17,52 @@ class TestCaseWithClient(TestCase):
         cls.client = Client()
 
 
-class IndexTest(TestCaseWithClient):
+class ListOrderTest(TestCaseWithClient):
     def test_empty(self):
-        response = self.client.get(reverse('orders:index'))
+        response = self.client.get(reverse('orders:list_order'))
         self.assertEqual(len(response.context['order_list']), 0)
 
     def test_orders(self):
         order = setup_order()
-        response = self.client.get(reverse('orders:index'))
+        response = self.client.get(reverse('orders:list_order'))
         self.assertEqual(len(response.context['order_list']), 1)
         self.assertContains(response, order.title)
         self.assertTemplateUsed(response, 'orders/index.html')
 
 
-class DetailedTest(TestCaseWithClient):
+class UpdateOrderTest(TestCaseWithClient):
     def test_not_exists(self):
-        response = self.client.get(reverse('orders:detail', args=[10]))
+        response = self.client.get(reverse('orders:update_order', args=[10]))
         self.assertEqual(response.status_code, 404)
 
     def test_order(self):
         order = setup_order()
-        response = self.client.get(reverse('orders:detail', args=[order.id]))
+        response = self.client.get(reverse('orders:update_order', args=[order.id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'orders/detail.html')
         self.assertContains(response, order.title)
         self.assertContains(response, order.description)
 
 
-class AddCommentTest(TestCaseWithClient):
+class CreateCommentTest(TestCaseWithClient):
     def test_create(self):
         order = setup_order()
         comments_count = Comment.objects.count()
         response = self.client.post(
-            reverse('orders:add_comment', args=[order.id]),
+            reverse('orders:create_comment', args=[order.id]),
             data={'text': 'new comment'}
         )
         self.assertRedirects(
             response,
-            reverse('orders:detail', args=[order.id])
+            reverse('orders:update_order', args=[order.id])
         )
         self.assertEqual(Comment.objects.count(), comments_count + 1)
 
 
-class NewOrderTest(TestCaseWithClient):
+class CreateOrderTest(TestCaseWithClient):
     def test_create(self):
         self.client.post(
-            reverse('orders:new_order'),
+            reverse('orders:create_order'),
             data={'title': 'new', 'description': 'new'}
         )
         self.assertEqual(Order.objects.get(pk=1).status, Order.Status.NEW)

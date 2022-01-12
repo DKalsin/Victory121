@@ -21,14 +21,14 @@ class OrderCreateView(generic.CreateView):
         form.instance.status = Order.Status.NEW
         return super().form_valid(form)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.get_form_class().template_name = 'orders/order_form_template.html'
+
 
 class OrderUpdateView(generic.UpdateView):
     model = Order
     fields = ['title', 'description','status', 'assignee', ]
-
-
-class OrderDetailView(generic.DetailView):
-    model = Order
     template_name = 'orders/detail.html'
     extra_context = {'comment_form': CommentCreateView().get_form_class()}
 

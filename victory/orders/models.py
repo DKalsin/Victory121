@@ -33,8 +33,8 @@ class Order(models.Model):
         READY = 4, _('Ready')
         FIXED = 5, _('Fixed')
 
-    title = models.CharField('title', max_length=1000)
-    description = models.CharField('description', max_length=1000)
+    title = models.CharField('title', max_length=500)
+    description = models.TextField('description', max_length=1000)
     created = models.DateTimeField('created', auto_now_add=True)
     updated = models.DateTimeField('updated', auto_now=True)
     assignee = models.ForeignKey(
@@ -54,7 +54,7 @@ class Order(models.Model):
     )
 
     def get_absolute_url(self):
-        return reverse('orders:detail', args=[self.id])
+        return reverse('orders:update_order', args=[self.id])
 
     def total_price(self):
         return sum(self.works.values('price'))
@@ -65,7 +65,7 @@ class Order(models.Model):
 
 class Comment(models.Model):
     created = models.DateTimeField('created', auto_now_add=True)
-    text = models.CharField(max_length=1000)
+    text = models.TextField(max_length=1000)
     # author = user or client
     order = models.ForeignKey(
         Order,

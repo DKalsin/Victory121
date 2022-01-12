@@ -8,7 +8,7 @@ Orders
 {% for order in order_list %}
   <div class="row">
     <div class="col">
-      <a href="{% url 'orders:detail' order.id %}">{{ order.title }}</a>
+      <a href="{% url 'orders:update_order' order.id %}">{{ order.title }}</a>
     </div>
     <div class="col">
       {{ order.assignee }}

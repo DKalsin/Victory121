@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block title %} New order {% endblock %}
 {% block content %}
-<form action="{% url 'orders:new_order' %}" method="post">
+<form action="{% url 'orders:create_order' %}" method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  {% include 'orders/order_form_template.html' %}
   <input type="submit" value="Create">
 </form>
 {% endblock %}
