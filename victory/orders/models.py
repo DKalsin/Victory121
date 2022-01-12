@@ -76,6 +76,9 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
 
+    def get_absolute_url(self):
+        return self.order.get_absolute_url()
+
 
 class WorkCost(models.Model):
     work = models.CharField(max_length=500)
