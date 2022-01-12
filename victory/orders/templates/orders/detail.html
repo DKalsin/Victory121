@@ -10,7 +10,9 @@
 </ul>
 <form action="{% url 'orders:create_comment' order.id %}" method="post">
   {% csrf_token %}
-  {{ comment_form.as_p }}
+  {% with form=comment_form %}
+    {% include 'orders/comment_form_template.html' %}
+  {% endwith %}
   <input type="submit" value="Comment">
 </form>
 {% endblock %}

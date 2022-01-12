@@ -1,0 +1,12 @@
+<p>
+  {% with text=form.text %}
+    {{ text.errors }}
+    <input
+      type="text"
+      id="{{text.id_for_label}}"
+      name="{{text.name}}"
+      maxlength="500"
+      value="{{text.value|default_if_none:''}}"
+    >
+  {% endwith %}
+</p>
