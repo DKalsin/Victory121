@@ -1,0 +1,5 @@
+Django==4.0.1
+django-widget-tweaks==1.4.11
+pep8==1.7.1
+pyflakes==2.2.0
+pylint==2.6.0

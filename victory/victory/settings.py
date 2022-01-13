@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['157.230.119.208']
 
 INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
+    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

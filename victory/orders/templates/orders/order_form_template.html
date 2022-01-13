@@ -1,38 +1,24 @@
+{% load widget_tweaks %}
 {% for hidden in form.hidden_fields %}
   {{ hidden }}
 {% endfor %}
 
 <p>
-  {% with title=form.title %}
-    {{ title.errors }}
-    <input
-      type="text"
-      id="{{title.id_for_label}}"
-      name="{{title.name}}"
-      maxlength="500"
-      value="{{title.value|default_if_none:''}}"
-    >
-  {% endwith %}
+  {{ form.title.errors }}
+  {% render_field form.title class+="form-control" %}
 </p>
 
 <p>
-  {% with description=form.description %}
-    {{ description.errors }}
-    <textarea
-      id="{{description.id_for_label}}"
-      name="{{description.name}}"
-      maxlength="1000"
-    >{{description.value|default_if_none:''}}
-    </textarea>
-  {% endwith %}
+  {{ form.description.errors }}
+  {% render_field form.description class+="form-control" %}
 </p>
 
 <p>
   {{ form.assignee.errors }}
-  {{ form.assignee }}
+  {% render_field form.assignee %}
 </p>
 
 <p>
   {{ form.status.errors }}
-  {{ form.status }}
+  {% render_field form.status %}
 </p>
