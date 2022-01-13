@@ -5,6 +5,16 @@ Orders
 {% endblock %}
 
 {% block content %}
+<div class="row">
+  <div class="col">
+    Order title
+  </div>
+  <div class="col">
+    Assignee
+  </div>
+  <div class="col">
+    Status
+  </div>
 {% for order in order_list %}
   <div class="row">
     <div class="col">
