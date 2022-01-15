@@ -16,16 +16,6 @@ class CommentCreateView(generic.CreateView):
 class OrderCreateView(generic.CreateView):
     model = Order
     fields = ['title', 'description', 'assignee', 'status']
-    initial = {'status': 0}
-
-    def form_valid(self, form):
-        if form.instance.status is None:
-            form.instance.status = Order.Status.NEW
-        return super().form_valid(form)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.get_form_class().template_name = 'orders/order_form_template.html'
 
 
 class OrderUpdateView(generic.UpdateView):

@@ -44,7 +44,7 @@ class Order(models.Model):
         blank=True,
         related_name='assigned_orders'
     )
-    status = models.IntegerField(choices=Status.choices)
+    status = models.IntegerField(choices=Status.choices, default=Status.NEW)
     client = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
