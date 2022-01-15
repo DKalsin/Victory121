@@ -27,7 +27,7 @@ class ListOrderTest(TestCaseWithClient):
         response = self.client.get(reverse('orders:list_order'))
         self.assertEqual(len(response.context['order_list']), 1)
         self.assertContains(response, order.title)
-        self.assertTemplateUsed(response, 'orders/index.html')
+        self.assertTemplateUsed(response, 'orders/order_list.html')
 
 
 class UpdateOrderTest(TestCaseWithClient):

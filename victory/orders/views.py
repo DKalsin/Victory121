@@ -26,7 +26,6 @@ class OrderUpdateView(generic.UpdateView):
 
 
 class OrderListView(generic.ListView):
-    template_name = 'orders/index.html'
 
     def get_queryset(self):
         return Order.objects.order_by('-updated')
