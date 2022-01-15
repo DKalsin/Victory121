@@ -1,7 +1,9 @@
-from django.shortcuts import  get_object_or_404
+# from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
 from django.views import generic
 
 from .models import Order, Comment
+from .forms import OrderForm
 
 
 class CommentCreateView(generic.CreateView):
@@ -14,13 +16,12 @@ class CommentCreateView(generic.CreateView):
 
 
 class OrderCreateView(generic.CreateView):
-    model = Order
-    fields = ['title', 'description', 'assignee', 'status']
+    form_class = OrderForm
 
 
 class OrderUpdateView(generic.UpdateView):
+    form_class = OrderForm
     model = Order
-    fields = ['title', 'description','status', 'assignee', ]
     template_name = 'orders/detail.html'
     extra_context = {'comment_form': CommentCreateView().get_form_class()}
 
