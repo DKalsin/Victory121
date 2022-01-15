@@ -63,6 +63,6 @@ class CreateOrderTest(TestCaseWithClient):
     def test_create(self):
         self.client.post(
             reverse('orders:create_order'),
-            data={'title': 'new', 'description': 'new'}
+            data={'title': 'new', 'description': 'new', 'status': '0'}
         )
         self.assertEqual(Order.objects.get(pk=1).status, Order.Status.NEW)
