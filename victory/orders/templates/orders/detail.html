@@ -2,12 +2,32 @@
 {% block title %} Order details {{ order.id }} {% endblock %}
 
 {% block content %}
-{% include 'orders/order_form_template.html' %}
-<ul>
+<form action="{% url 'orders:update_order' order.id %}" method="post" target="hidden-form">
+  {% csrf_token %}
+  {% include 'orders/order_form_template.html' %}
+</form>
+
+Work log
+<ul class="list-group list-group-flush">
   {% for comment in order.comments.all %}
-    <li> {{comment.text}} </li>
+    <li class="list-group-item">
+      <div class="row small">
+        <p>
+        <div class="col">
+          {{ comment.author.first_name }} {{ comment.author.last_name }} &lt;{{ comment.author.email }}&gt;
+        </div>
+        <div class="col-2">
+          {{ comment.created }}
+        </div>
+        </p>
+      </div>
+      <div class="row">
+        {{comment.text}}
+      </div>
+    </li>
   {% endfor %}
 </ul>
+<hr>
 <form action="{% url 'orders:create_comment' order.id %}" method="post">
   {% csrf_token %}
   {% with form=comment_form %}
@@ -15,4 +35,13 @@
   {% endwith %}
   <input type="submit" value="Comment">
 </form>
+<iframe style="display:none" name="hidden-form"></iframe>
+{% endblock %}
+
+{% block script %}
+<script>
+  function OnChange(obj) {
+    obj.form.submit()
+  }
+</script>
 {% endblock %}

@@ -3,22 +3,34 @@
   {{ hidden }}
 {% endfor %}
 
-<p>
-  {{ form.title.errors }}
-  {% render_field form.title class+="form-control" %}
-</p>
-
-<p>
-  {{ form.description.errors }}
-  {% render_field form.description class+="form-control" %}
-</p>
-
-<p>
-  {{ form.assignee.errors }}
-  {% render_field form.assignee class+="form-control" %}
-</p>
-
-<p>
-  {{ form.status.errors }}
-  {% render_field form.status class+="form-control" %}
-</p>
+<div class="row">
+  <p>
+    {{ form.title.errors }}
+    {% render_field form.title class+="form-control" onchange="OnChange(this)" %}
+  </p>
+</div>
+<div class="row">
+  <div class="col">
+    <p>
+      {{ form.description.errors }}
+      <label for="{{ form.description.id_for_label }}">Description:</label>
+      {% render_field form.description class+="form-control" onchange="OnChange(this)" %}
+    </p>
+  </div>
+  <div class="col-2">
+    <p>
+      {{ form.assignee.errors }}
+      <label for="{{ form.assignee.id_for_label }}">Assignee:</label>
+      {% render_field form.assignee class+="form-control" onchange="OnChange(this)" %}
+    </p>
+    <p>
+      {{ form.status.errors }}
+      <label for="{{ form.status.id_for_label }}">Status:</label>
+      {% render_field form.status class+="form-control" onchange="OnChange(this)" %}
+    </p>
+    <p>
+      <label for="{{ form.status.id_for_label }}">Client phone:</label>
+      {% render_field form.client class+="form-control" onchange="OnChange(this)" %}
+    </p>
+  </div>
+</div>

@@ -1,27 +1,12 @@
 from django.conf import settings
-from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 
 
+# username equals tel number
 User = get_user_model()
-
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name='profile')
-    phone_regex = RegexValidator(
-        regex=r'^\+?\d{9,15}$',
-        message="Phone number must be entered in the format: '+77071234567'")
-    phone_number = models.CharField(
-        validators=[phone_regex],
-        max_length=17,
-        blank=False,
-        unique=True)
 
 
 class Order(models.Model):
@@ -72,6 +57,11 @@ class Comment(models.Model):
         Order,
         on_delete=models.CASCADE,
         related_name='comments'
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
     )
 
     def __str__(self):
