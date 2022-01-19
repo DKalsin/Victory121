@@ -19,6 +19,6 @@ class UserForm(ModelForm):
     def clean_username(self):
         try:
             phone = parse_phone(self.cleaned_data['username'])
+            return format_number(phone, PhoneNumberFormat.E164)
         except Exception as e:
             raise ValidationError("Phone number is not valid") from e
-        self.cleaned_data['username'] = format_number(phone, PhoneNumberFormat.E164)

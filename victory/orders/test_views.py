@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from .models import Order, Comment
+from .models import Order, Comment, User
 from django.shortcuts import reverse
 
 
@@ -11,10 +11,12 @@ def setup_order():
 
 
 class TestCaseWithClient(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.client = Client()
+
+    def setUp(self):
+        super().setUp()
+        self.client = Client()
+        self.user = User.objects.create(username='admin')
+        self.client.force_login(self.user)
 
 
 class ListOrderTest(TestCaseWithClient):
@@ -63,6 +65,14 @@ class CreateOrderTest(TestCaseWithClient):
     def test_create(self):
         self.client.post(
             reverse('orders:create_order'),
-            data={'title': 'new', 'description': 'new', 'status': '0'}
+            data={
+                'username': '+77771234567',
+                'title': 'new',
+                'description': 'new',
+                'status': '0',
+                'email': 'noreply@ya.ru',
+                'last_name': 'noname',
+                'first_name': 'noname',
+            }
         )
         self.assertEqual(Order.objects.get(pk=1).status, Order.Status.NEW)

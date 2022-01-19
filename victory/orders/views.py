@@ -1,4 +1,4 @@
-# from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 
@@ -6,7 +6,7 @@ from .models import Order, Comment, User
 from .forms import OrderForm, UserForm
 
 
-class CommentCreateView(generic.CreateView):
+class CommentCreateView(LoginRequiredMixin, generic.CreateView):
     model = Comment
     fields = ['text']
 
