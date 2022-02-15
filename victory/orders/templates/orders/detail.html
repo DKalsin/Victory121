@@ -7,6 +7,7 @@
   {% include 'orders/order_form_template.html' %}
 </form>
 
+<div class="container">
 Work log
 <ul class="list-group list-group-flush">
   {% for comment in order.comments.all %}
@@ -30,6 +31,7 @@ Work log
   {% endfor %}
 </ul>
 <hr>
+</div>
 <form action="{% url 'orders:create_comment' order.id %}" method="post">
   {% csrf_token %}
   {% with form=comment_form %}
